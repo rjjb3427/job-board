@@ -15,12 +15,13 @@
 
   %h3 Phones
 
-  .form-group
-    = label_tag "Phone 1 - Number"
-    = text_field_tag "phone1[number]", "", class: "form-control" # Name of field
+  - 3.times do |i|
+    .form-group
+      = label_tag "Phone #{i} - Number"
+      = text_field_tag "phones[][number]", "", class: "form-control" # Name of field
 
-  .form-group
-    = label_tag "Phone 1 - Description"
-    = text_field_tag "phone1[description]", "", class: "form-control"
+    .form-group
+      = label_tag "Phone #{i} - Description"
+      = text_field_tag "phones[][description]", "", class: "form-control"
 
   = f.submit "Sign up", class: "btn btn-primary"

@@ -6,11 +6,12 @@ class ProfilesController < ApplicationController
   def create
     @user = User.new user_params
     if @user.save
-      @phone1 = @user.phones.new phone1_params
-      if @phone1.save
-        redirect_to root_path, notice: "Saved user and phones"
+      results = phones_params.map { |p| @user.phones.create(p) }
+
+      if results.all?
+        redirect_to root_path, notice: "Saved user and all phones"
       else
-        render :new
+        redirect_to root_path, error: "Failed to save some phones"
       end
     else
       render :new
@@ -21,7 +22,9 @@ class ProfilesController < ApplicationController
     params.require(:user).permit(:email, :password, :password_confirmation)
   end
 
-  def phone1_params
-    params.require(:phone1).permit(:number, :description)
+  def phones_params
+    params.require(:phones).map do |p|
+      p.permit(:number, :description)
+    end
   end
 end
