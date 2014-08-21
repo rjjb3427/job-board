@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resource :favorites, only: [:create, :destroy]
   end
 
-  resources :users, only: [:new, :create]
+  resources :profiles, only: [:new, :create]
 
   root to: "application#home"
 end
