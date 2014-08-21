@@ -13,6 +13,7 @@ class JobsController < ApplicationController
   end
 
   def new
+    @now = Time.now
     @job = Job.new(
       start_date: Time.now,
       end_date:   Time.now + 1.week
@@ -30,7 +31,11 @@ class JobsController < ApplicationController
       redirect_to @job, notice: "Your listing was created"
     else
       # Validation errors, redisplay form
-      render :new
+      render :new # this just says to display the `new` view
+
+      # This _would_ end up calling the new action, but that
+      #   isn't what we want (no create data that way)
+      # redirect_to new_job_path
     end
   end
 

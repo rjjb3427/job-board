@@ -1,5 +1,7 @@
 %h1 Post a New Job
 
+%p It is now #{@now.strftime "%H:%M:%S"}
+
 / looks for _form.html.? in the same view folder
 / something_else/_form.html.?
 = render partial: "form"
